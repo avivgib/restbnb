@@ -7,7 +7,7 @@ dist-ssr
 *.local
 
 # Env files
-.env
+*.env
 
 # Logs
 logs
