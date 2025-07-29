@@ -1,0 +1,54 @@
+.user-msg {
+  position: fixed;
+  top: 70px;
+  right: 1.5em;
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  min-width: 260px;
+  max-width: 400px;
+  padding: 1em 1.5em;
+
+  background-color: #fff;
+  color: #222;
+
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+  font-family: 'Airbnb Cereal', 'Segoe UI', sans-serif;
+  font-size: 0.95em;
+
+  opacity: 0;
+  transform: translateX(150%);
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.user-msg.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.user-msg.success {
+  border-left: 6px solid #2ecc71;
+}
+
+.user-msg.error {
+  border-left: 6px solid #e74c3c;
+}
+
+.user-msg button {
+  background: none;
+  border: none;
+  color: #999;
+  font-size: 1.2em;
+  cursor: pointer;
+  margin-left: auto;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #555;
+  }
+}

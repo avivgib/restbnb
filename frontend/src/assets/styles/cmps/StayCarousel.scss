@@ -1,0 +1,47 @@
+.carousel-controls {
+    display: flex;
+    padding-right: 11px;
+}
+
+.arrow-btn {
+    background-color: #f1f1f1;
+    border: none;
+    height: 24px;
+    width: 24px;
+    border-radius: 50%;
+    font-size: 1rem;
+    cursor: pointer;
+    color: #222;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.arrow-btn:hover:not(.disabled) {
+    background-color: #ddd;
+}
+
+.arrow-btn.disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    pointer-events: none;
+    background-color: #FFFFFF;
+    border: 1px solid #C1C1C1;
+}
+
+.stay-list {
+    display: grid;
+    grid-auto-flow: column;
+    overflow-x: hidden;
+    gap: 11px;
+}
+
+.stay-list .slick-slide>div {
+    padding-right: 11px;
+}
+
+.stay-list {
+    align-items: stretch;
+}

@@ -1,0 +1,321 @@
+.stay-booking-card {
+  border: 1px solid #dddddd;
+  border-radius: 12px;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-bottom: 0.5rem;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  font-family: 'Roboto', sans-serif;
+  max-width: 375px;
+  width: 100%;
+  background: #fff;
+  position: relative;
+
+  .price-row {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .booking-header,
+  .no-dates-header {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0rem;
+    color: #222;
+    padding-left: 0;
+    border: none;
+  }
+
+  .price {
+    font-size: 1.65rem;
+    font-weight: 600;
+  }
+
+  .per-night {
+    font-size: 1rem;
+    color: #222;
+    font-weight: 400;
+  }
+
+  .booking-inputs {
+    display: flex;
+    flex-direction: column;
+    // border: 1px solid #222222;
+    border-radius: 8px;
+    position: relative;
+
+    .date-inputs {
+      display: flex;
+      border-top: 1px solid #222222;
+      border-right: 1px solid #222222;
+      border-left: 1px solid #222222;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      
+
+      .date-cell {
+        flex: 1;
+        padding-left: 0.75rem;
+        padding-top: 0.35rem;
+        padding-bottom: 0.35rem;
+        border-right: 1px solid #222222;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
+        &:last-child {
+          border-right: none;
+        }
+
+        label {
+          font-size: 0.75rem;
+          font-weight: 600;
+          color: #222;
+          margin-bottom: 0.25rem;
+        }
+
+        span {
+          color: #222;
+          font-size: 0.95rem;
+        }
+      }
+    }
+
+    .guests-cell {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-left: 0.75rem;
+      padding-top: 0.35rem;
+      padding-bottom: 0.35rem;
+      font-size: 0.85rem;
+      border-top: 1px solid #222222;
+      border-bottom: 1px solid #222222;
+      border-right: 1px solid #222222;
+      border-left: 1px solid #222222;
+      // border-radius: 8px;
+      border-bottom-right-radius: 8px;
+      border-bottom-left-radius: 8px;
+
+      &.active{
+        border-top: 2px solid #222222;
+      border-bottom: 2px solid #222222;
+      border-right: 2px solid #222222;
+      border-left: 2px solid #222222;
+        
+      }
+      
+
+      label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: #222;
+        margin-bottom: 0.25rem;
+      }
+
+      .guest-count {
+        color: #222;
+        font-size: 0.95rem;
+      }
+
+      .arrow {
+        position: absolute;
+        // top: 0.75rem;
+        right: 0.75rem;
+        font-size: 1rem;
+        color: #222;
+        pointer-events: none;
+
+        img{
+          width: 10px;
+          height: 10px;
+        }
+      }
+
+      .booking-who-modal {
+        position: absolute;
+        // top: 100%;
+        top: calc(100% + 1px);
+        /* Immediately below .guests-cell with no gap */
+        left: 0;
+        background-attachment: scroll;
+        background-clip: border-box;
+        background-color: rgb(255, 255, 255);
+        background-image: none;
+        background-origin: padding-box;
+        background-position-x: 0%;
+        background-position-y: 0%;
+        background-repeat: repeat;
+        background-size: auto;
+        border-bottom-left-radius: 4px;
+        border-bottom-right-radius: 4px;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 6px 0px, rgba(0, 0, 0, 0.07) 0px 0px 0px 1px;
+        box-sizing: border-box;
+        color: rgb(34, 34, 34);
+        display: block;
+        font-family: "Airbnb Cereal VF", Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        font-size: 16px;
+        font-synthesis-small-caps: none;
+        font-synthesis-style: none;
+        font-synthesis-weight: none;
+        font-weight: 400;
+        // height: 408px;
+        height: 370px;
+        line-break: strict;
+        line-height: 20px;
+        margin-bottom: 16px;
+        min-width: 0;
+        padding-bottom: 16px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-top: 16px;
+        position: absolute;
+        right: 0px;
+        text-align: left;
+        text-size-adjust: 100%;
+        unicode-bidi: isolate;
+        width: 100%;
+        z-index: 999;
+        -webkit-font-smoothing: antialiased;
+
+        max-height: calc(100vh - 100%);
+        overflow-y: auto;
+
+        .booking-guest-row {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 1rem 0;
+          // border-bottom: 1px solid #eee;
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          .booking-guest-info {
+            .booking-label {
+              font-weight: 600;
+              font-size: 1rem;
+              color: #222;
+            }
+
+            .booking-desc {
+              font-size: 14px;
+              color: #717171;
+              margin-top: 0.25rem;
+
+              a {
+                font-size: 14px;
+                // color: #717171;
+                color: #222;
+                font-weight: 450;
+                text-decoration: underline;
+              }
+            }
+          }
+
+          .booking-guest-controls {
+            display: flex;
+            align-items: center;
+
+            button {
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              border: 1px solid #ccc;
+              background-color: white;
+              font-size: 20px;
+              line-height: 1;
+              font-weight: 400;
+              color: #717171;
+              cursor: pointer;
+
+              &:hover {
+                border-color: black;
+                color: black;
+              }
+            }
+
+            span {
+              font-size: 16px;
+              min-width: 20px;
+              text-align: center;
+            }
+          }
+        }
+
+        .modal-close-button {
+          position: absolute;
+          bottom: 16px;
+          right: 16px;
+          background: none;
+          border: none;
+          font-family: "Airbnb Cereal VF", Circular, -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+          font-size: 14px;
+          font-weight: 500;
+          color: #222;
+          cursor: pointer;
+          padding: 4px 8px;
+          padding-right: 0;
+          text-decoration: underline;
+
+          &:hover {
+            color: #717171;
+          }
+        }
+      }
+    }
+  }
+
+  .check-btn,
+  .reserve-btn {
+    background: linear-gradient(90deg, #ff385c, #e61e4d);
+    color: white;
+    font-size: 1.0rem;
+    padding: 0.9rem;
+    width: 100%;
+    border: none;
+    border-radius: 24px;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .charge-note {
+    text-align: center;
+    font-size: 14px;
+    color: #222222;
+    margin-bottom: 1rem;
+  }
+
+  .breakdown {
+    font-size: 0.95rem;
+    color: #222;
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.5rem;
+      text-decoration: underline;
+
+      &.total {
+        text-decoration: none;
+        font-weight: 500;
+      }
+    }
+
+    hr {
+      border: none;
+      border-top: 1px solid #ddd;
+      margin: 1rem 0;
+    }
+
+    .total {
+      font-weight: 600;
+    }
+  }
+}

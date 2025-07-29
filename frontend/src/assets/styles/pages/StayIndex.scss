@@ -1,0 +1,30 @@
+.stay-index {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 7rem);
+    // margin-bottom: 3rem;
+    // }
+    .stay-lists{
+        font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+        padding-top: 180px;
+        // margin-left: 3%;
+        // margin-right: 3%;
+        // max-width: 90%;
+        max-width: 1400px;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin: 0 auto;
+    }
+    h2 {
+        margin: 0;
+        font-size: 1.3em;
+    }
+
+    button {
+        margin-inline-end: 0;
+    }
+}
+
+.index-main-container{
+    min-height: calc(100vh - 7rem);
+}

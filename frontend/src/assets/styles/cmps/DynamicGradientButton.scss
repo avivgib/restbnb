@@ -1,0 +1,137 @@
+// .dynamic-gradient-button {
+//     position: relative;
+//     padding: 0.75rem 1.5rem;
+//     font-size: 1rem;
+//     border: none;
+//     border-radius: 999px;
+//     cursor: pointer;
+//     color: white;
+//     background-color: #ff385c; // solid base color
+//     transition: background 0.3s ease;
+//     outline: none;
+  
+//     &:hover {
+//       background: radial-gradient(
+//         circle at var(--x, 50%) var(--y, 50%),
+//         #ff385c,
+//         #e61e4d,
+//         #bd1e59,
+//         #92174d
+//       );  
+//   }
+//   }
+
+.dynamic-gradient-button {
+    position: relative;
+    overflow: hidden;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    border: none;
+    border-radius: 999px;
+    cursor: pointer;
+    color: white;
+    background-color: #e61e4d;
+    outline: none;
+    margin-inline: 0;
+  
+    // Set up a new stacking context
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  
+    // Wrap the text in a span and elevate it
+    span {
+      position: relative;
+      z-index: 100; // <-- Ensures text appears above the gradient layer
+    }
+  
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: 1; // <-- Layer behind text
+      background: radial-gradient(
+        circle at var(--x, 50%) var(--y, 50%),
+        #ff385c,
+        #e61e4d,
+        #bd1e59,
+        #92174d
+      );
+      opacity: 0;
+      transition: opacity 1s ease;
+      pointer-events: none; // Prevent ::before from blocking interaction
+    }
+  
+    &:hover::before {
+      opacity: 1;
+    }
+  }
+
+  
+  .booking-order-page .dynamic-gradient-button{
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    align-items: center;
+  }
+
+  .stay-booking-card .dynamic-gradient-button{
+    font-size: 1rem;
+    padding: 0.9rem;
+    width: 100%;
+    border-radius: 24px;
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    margin-top: 1rem;
+  }
+
+  .stay-scroll-nav .dynamic-gradient-button{
+  
+
+    border: none;
+      padding: 0.75rem 1.25rem;
+      border-radius: 24px;
+      font-weight: 600;
+  }
+
+  .booking-modal-overlay .dynamic-gradient-button{
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    align-items: center;
+  }
+
+  
+  // .order-confirmation-modal .dynamic-gradient-button{
+  //   padding: 1rem 2rem;
+  //   border-radius: 12px;
+  //   font-size: 1.1rem;
+  //   font-weight: bold;
+  //   margin-top: 0px;
+  //   margin-bottom: 0px;
+  //   margin-left: 0px;
+  //   margin-right: 0px;
+  //   align-items: center;
+  // }
+
+  .decline-modal-actions .dynamic-gradient-button{
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    align-items: center;
+  }

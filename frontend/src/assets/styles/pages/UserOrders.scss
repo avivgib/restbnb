@@ -1,0 +1,80 @@
+.main-container{
+  padding: 0;
+  display: block;
+  
+}
+// no reservations state - make sure footer stays at the bottom
+.orders-main-container{
+  min-height: calc(100vh - 7rem);
+  width: 100%;
+}
+
+.user-orders {
+  // padding: 2em max(1em, 6vw);
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  color: #222;
+  width: 100%;
+  
+  
+.header{
+  width: 100%;
+}
+.orders-section{
+  // width: 80%;
+  // max-width: 1200px !important;
+  max-width: 1100px !important;
+  padding-left: 2rem !important;
+  padding-right: 2rem !important;
+  justify-self: center;
+  .order-list {
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .order-labels {
+    margin-bottom: 0.5rem;
+    .order-preview {
+      background: none;
+      border: none;
+      padding: 0;
+      font-size: 0.95rem;
+      padding-left: 2.2rem;
+      padding-right: 1rem;
+      display: grid;
+  grid-template-columns: 3.5fr 1fr 1.2fr 1.2fr 1fr 1fr 1.2fr;  
+  gap: 1rem;
+
+      .preview-cell {
+        // font-weight: 600;
+        color: #333;
+        margin-right: 0;
+        margin-left: 0;
+        font-size: 16px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        text-align: left;
+        justify-content:center;
+        gap: 0.5rem;
+        overflow-wrap: anywhere;
+    
+        &.destination {    
+          .stay-name {
+            font-weight: 600;
+            line-height: 1.2;
+            
+          }
+        }
+      }
+    }
+  }
+}
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5em;
+    font-weight: 600;
+  }
+}

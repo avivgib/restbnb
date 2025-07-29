@@ -1,0 +1,236 @@
+.booking-summary {
+  border: 1.5px solid #ddd;
+  border-radius: 24px;
+  padding: 1.5rem;
+  background-color: #FFFFFF;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: #333;  
+  padding-bottom: 1rem;
+  margin-bottom: 0px;
+
+  .summary-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    .summary-thumbnail {
+      width: 100px;
+      height: 100px;
+      border-radius: 8px;
+      object-fit: cover;
+      margin-right: 0.8rem;
+      flex-shrink: 0;
+    }
+
+    .summary-info {
+      flex: 1;
+
+      h3 {
+        font-size: 1rem;
+        margin: 0 0 0.3rem 0;
+        color: #222;
+        font-size: 20px;
+    font-weight: 600;
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    line-height: 1.2;
+      }
+
+      p {
+        font-size: 0.85rem;
+        color: #717171;
+        margin: 0;
+
+        .review-star{
+          width: 16px;
+          height: 16px;
+        }
+
+        .rating {
+          color: #222;
+          font-size: 14px;
+          font-weight: 550;
+        }
+
+        .guest-favorite {
+          color: #222222;
+          font-size: 14px;
+          font-weight: 550;
+        }
+      }
+    }
+
+    
+
+  }
+
+  .stay-preview-img {
+    width: 100%;
+    border-radius: 12px;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.3rem;
+    
+  }
+
+  .guest-favorite {
+    font-size: 0.85rem;
+    color: #717171;
+  }
+
+  .free-cancellation {
+    margin-top: 1rem;
+    margin-bottom: 0px;
+    color: #333;
+    line-height: 1.4;
+    font-size: 16px;
+    font-weight: 550;
+  }
+
+  .cancel-before{
+    font-size: 16px;
+    font-weight: 400;
+    border-bottom: 1.5px solid #ddd;
+    padding-bottom: 0.75rem;
+    margin-bottom: 0px;
+
+    .full-policy{
+      color: #222;
+      font-size: 14px;
+      font-weight: 550;
+      text-decoration: underline;
+    }
+  }
+
+  .trip-details {
+    // border-bottom: 0.5px solid #e5e5e5;
+    // margin-top: 0px;
+    padding-top: 0.75rem;
+    border-bottom: 1.5px solid #ddd;
+    padding-bottom: 1rem;
+    // margin-top: 1.2rem;
+
+    h4 {
+      font-size: 1rem;
+      margin-bottom: 0.3rem;
+      color: #222;
+      padding-bottom: 0px;
+      margin-bottom: 0px;
+
+      font-size: 18px;
+    font-weight: 550;
+    }
+
+    p {
+      margin: 0.2rem 0;
+      color: #222;
+
+      font-size: 16px;
+      font-weight: 400;
+    }
+
+    
+  }
+
+  .price-details {
+    margin-top: 1.2rem;
+    
+    padding-bottom: 0rem;
+
+    h4 {
+      font-size: 1rem;
+      margin-bottom: 0.5rem;
+      color: #222;
+      font-size: 18px;
+    font-weight: 550;
+    }
+
+    .price-breakdown {
+      
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      font-size: 25x;
+      font-weight: 400;
+
+      li {
+        display: flex;
+        justify-content: space-between;
+        padding: 0.3rem 0;
+        color: #222;
+        span{
+          font-size: 15px;
+          font-weight: 400;
+        }
+        
+        
+
+        &.total {
+          
+          border-top: 1.5px solid #ddd;
+          // font-size: 16px;
+          // font-weight: 550;
+          padding-top: 0.6rem;
+          margin-top: 0.6rem;
+
+.label{
+  font-size: 16px;
+          font-weight: 600;
+}        
+
+        .currency{
+          font-size: 16px;
+          font-weight: 600;
+          text-decoration: underline;
+        }
+        .total-number{
+          font-size: 16px;
+          font-weight: 600;
+        }
+      }
+
+        span:first-child {
+          color: #222;
+        }
+
+        span:last-child {
+          color: #222;
+        }
+      }
+    }
+  }
+}
+
+.partial-summary {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #ddd;
+  padding-bottom: 0.5rem;
+
+  .partial-summary-left,
+  .partial-summary-right {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .summary-label {
+    font-size: 16px;
+      font-weight: 400;
+    color: #555;
+  }
+
+  .summary-amount {
+    font-size: 16px;
+      font-weight: 400;
+    text-align: right;
+  }
+}

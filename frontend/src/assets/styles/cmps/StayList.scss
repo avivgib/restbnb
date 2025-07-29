@@ -1,0 +1,44 @@
+.stay-list-container {
+    padding-inline: 1rem;
+}
+
+.list-header {
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: rem(32px) 0 rem(14px);
+    
+    
+}
+
+.title-btn {
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    background: transparent;
+    border: none;
+    font-size: 20px;    
+    font-weight: 500;
+    cursor: pointer;
+    color: #222;
+    letter-spacing: rem(-1.2px);
+    padding: 0;
+    margin: 0;
+    
+
+    .icon {
+        width: 12px;
+        height: 12px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        top: 1px;
+        transition: transform 0.2s ease;
+        font-size: rem(20px);
+    }
+}

@@ -1,0 +1,875 @@
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+  .stay-availability {
+    margin-top: 3rem;
+    width: 100%;
+    
+
+    h3 {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 0;
+      color: #222222;
+      margin-left: 2%;
+    }
+
+    .availability-subtitle {
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 20px;
+      color: #6a6a6a;
+      margin: 0.25rem 0;
+      margin-left: 2%;
+    }
+
+    .error-message {
+      font-size: 14px;
+      color: #d32f2f;
+      margin: 0.5rem 0;
+    }
+
+    .selected-dates {
+      text-align: right;
+      width: 100%;
+      
+      .clear-button {
+        all: unset;
+
+        margin-right: 1.5%;
+
+        position: relative;
+        
+        min-width: auto;
+
+
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        color: #222;
+        text-decoration: underline;
+        background-repeat: repeat;
+        padding: 8px;
+
+        cursor: pointer;
+        touch-action: manipulation;
+
+        &:hover {
+          background-color: #F7F7F7;
+          border-radius: 8px;
+        }
+      }
+    }
+
+    .rdp-root {
+      
+      .rdp-weekday {
+          color: black !important;
+          opacity: 1 !important;
+        }
+
+
+      --rdp-accent-color: #222222;
+      // --rdp-accent-background-color: #ebebeb;
+      --rdp-accent-background-color: rgb(247, 247, 247);
+      
+
+      .rdp-day_button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 42px;
+        height: 42px;
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 18px;
+        
+        margin: 0 1px;
+        transition: all 0.2s ease;
+        position: relative;
+        color: #000;
+
+        // &:hover {
+        //   border: 2px solid #000;
+        // }
+        &:not(.rdp-disabled):hover {
+  border: 2px solid #000; // doesn't exclude disabled hover border
+  border-radius: 50% !important;
+}
+
+        &[data-tooltip] {
+          position: relative;
+
+          &:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            top: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #333;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            z-index: 10;
+            pointer-events: none;
+          }
+
+          &:hover::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 5px solid transparent;
+            border-top-color: #333;
+            z-index: 10;
+          }
+        }
+      }
+      
+
+      .rdp-day.last-day .rdp-day_button,
+      .rdp-day.invalid-check-in .rdp-day_button {
+        color: #6a6a6a;
+        background-color: transparent;
+        font-weight: 500;
+      }
+
+      .rdp-day.check-in .rdp-day_button,
+      .rdp-day.check-out .rdp-day_button {
+        background-color: #000;
+        color: #fff;
+        font-weight: bold;
+      }
+
+      .rdp-day_range_middle {
+        background-color: #ebebeb;
+        color: #000;
+      }
+
+      
+      .rdp-disabled {
+        // color: #ccc; //affects line-through
+        // cursor: not-allowed;
+        cursor: default;
+        background-color: transparent;
+      text-decoration: line-through;  
+
+      //  &:hover {
+      //     border: 0px solid transparent;
+      //   }
+      }
+      
+
+      .rdp-caption_label {
+        color: #000;
+        font-weight: 500;
+        font-size: 18px;
+        text-align: center;
+      }
+
+      .rdp-months {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+      }
+    }
+  }
+
+  // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+  .stay-availability {
+    margin-top: 3rem;
+    width: 100%;
+
+    h3 {
+      font-size: 22px;
+      font-weight: 500;
+      margin-bottom: 0rem;
+      color: #222222;
+    }
+
+    p {
+      margin-left: 1rem;
+      // margin: 0.25rem 0;
+      font-size: 14px;
+      color: #6A6A6A;
+    }
+
+    .availability-subtitle {
+      // color: #222;
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 20px;
+      color: #6a6a6a;
+    }
+
+--rdp-range_middle-background-color: #ebebeb !important;
+    --rdp-range_middle-color: black !important;
+}
+
+
+    //   .calendar-wrapper {
+    //     .rdp-root {
+    //       --rdp-accent-color: #222222 !important;
+    //       --rdp-accent-background-color: #ebebeb !important;
+
+    //       .rdp-day_button {
+    //         display: flex !important;
+    //         align-items: center !important;
+    //         justify-content: center !important;
+    //         flex-direction: column !important;
+
+    //         width: 48px !important;
+    //         height: 48px !important;
+
+    //         font-size: 14px !important;
+    //         font-weight: 500 !important;
+    //         line-height: 18px !important;
+    //         text-align: center !important;
+    //         // cursor: default !important;
+    //         user-select: none !important;
+
+    //         background-color: transparent !important;
+    //         border: 1px solid #ffffff !important;
+    //         border-radius: 100% !important;
+    //         margin: 0 1px !important;
+
+    //         transition: background-color 0.2s ease !important;
+
+    //         &:hover {
+    //           background-color: #ffffff !important;
+    //           color: #000 !important;
+    //         }
+    //       }
+
+    //       .rdp-day.last-day .rdp-day_button,
+    //       .rdp-day.invalid-check-in-near-end .rdp-day_button,
+    //       .rdp-day.invalid-check-in .rdp-day_button,
+    //       .rdp-day.invalid-check-out .rdp-day_button {
+    //         color: #6a6a6a !important;
+    //         border: 1px solid #ffffff !important;
+    //         background-color: transparent !important;
+    //         font-weight: 500 !important;
+    //         // cursor: not-allowed !important;
+    //       }
+
+    //       .rdp-day.last-day .rdp-day_button {
+    //         // background-color: #222 !important;
+    //         color: #6a6a6a !important;
+    //         border-radius: 50% !important;
+    //         border: none !important;
+    //       }
+
+    //       // hover משמר את אותו העיצוב
+    //       .rdp-day.invalid-check-in-near-end:hover .rdp-day_button,
+    //       .rdp-day.last-day:hover .rdp-day_button {
+    //         background-color: rgb(247, 247, 247) !important;
+    //         color: rgb(106, 106, 106) !important;
+    //       }
+
+    //       // אם נבחרים – העיצוב נשמר
+    //       .rdp-day.invalid-check-in-near-end .rdp-day_selected,
+    //       .rdp-day.last-day.rdp-day_selected {
+    //         background-color: #222 !important;
+    //         color: white !important;
+    //         border-radius: 50% !important;
+    //         font-weight: bold !important;
+    //         border: none !important;
+    //       }
+
+
+    //       .rdp-day:not(.rdp-day_selected):not(.rdp-day_range_start):not(.rdp-day_range_end):not(.rdp-day_range_middle) {
+    //         color: black !important;
+    //       }
+
+    //       .rdp-caption_label {
+    //         color: black;
+    //       }
+
+    //       .rdp-weekday {
+    //         color: black !important;
+    //         opacity: 1 !important;
+    //       }
+
+    //       --rdp-day-hover-border: 2px solid black !important;
+
+    //       --rdp-day-width: 40px !important;
+    //       --rdp-day-height: 40px !important;
+
+    //       --rdp-day_button-width: 40px !important;
+    //       --rdp-day_button-height: 40px !important;
+    //       --rdp-day_button-border-radius: 50% !important;
+    //       --rdp-day_button-border: none !important;
+
+    //       --rdp-selected-border: none !important;
+
+    
+    //       --rdp-range_start-date-background-color: black !important;
+    //       --rdp-range_end-date-background-color: black !important;
+
+    //       --rdp-range_start-color: white !important;
+    //       --rdp-range_end-color: white !important;
+
+    //       .rdp-day:not(.rdp-day_selected):not(.rdp-day_range_middle):hover .rdp-day_button {
+    //         border: 1px solid #6a6a6a !important;
+    //         border-radius: 50% !important;
+    //       }
+
+    //       .rdp-day {
+    //         transition: all 0.2s ease !important;
+    //       }
+
+    //       .rdp-month_caption {
+    //         justify-content: center !important;
+    //         text-align: center !important;
+    //         font-weight: 500 !important;
+    //         font-size: 16px !important;
+    //       }
+
+    //       .rdp-caption {
+    //         justify-content: center !important;
+    //       }
+
+    //       .rdp-months {
+    //         display: flex !important;
+    //         padding-top: 22px;
+    //         justify-content: center !important;
+    //         gap: 26px !important;
+    //         width: 100% !important;
+    //       }
+
+    //       width: 100% !important;
+
+    //       .rdp-selected {
+    //         font-weight: 450;
+    //       }
+
+    
+
+    //       .rdp-day.rdp-disabled {
+    //         pointer-events: none !important;
+    //       }
+
+    //       .rdp-day.rdp-disabled::before {
+    //         background-color: transparent !important;
+    //         content: none !important;
+    //       }
+
+    //       .rdp-day.rdp-disabled .rdp-day_button {
+    //         background-color: transparent !important;
+    //         border: none !important;
+    //         color: #666666 !important;
+    //         cursor: default !important;
+    //       }
+
+    //     }
+    //   }
+    // }
+
+
+    // .calendar-wrapper {
+    //   .rdp-root {
+        
+    //     --rdp-accent-color: #222222 !important;
+    //     --rdp-accent-background-color: #ebebeb !important;
+
+    //     // --rdp-range_start-date-background-color: black;
+    //     // --rdp-range_end-date-background-color: black;
+    //     // --rdp-range_start-color: white;
+    //     // --rdp-range_end-color: white;
+
+    //     // ~~~ Aviv ~~~
+    //     .rdp-day_button {
+    //       display: flex !important;
+    //       align-items: center !important;
+    //       justify-content: center !important;
+    //       flex-direction: column !important;
+
+    //       width: 42px !important;
+    //       height: 42px !important;
+
+    //       font-size: 14px !important;
+    //       font-weight: 500 !important;
+    //       line-height: 18px !important;
+    //       text-align: center !important;
+    //       user-select: none !important;
+
+    //       // background-color: transparent !important;
+    //       // border: 1px solid #ffffff !important;
+    //       border-radius: 100% !important;
+    //       margin: 0 1px !important;
+
+    //       // transition: background-color 0.2s ease !important;
+
+    //       &:hover {
+    //         background-color: #ffffff !important;
+    //         color: #000 !important;
+    //       }
+    //     }
+
+    //     .rdp-day.last-day .rdp-day_button,
+    //     .rdp-day.invalid-check-in-near-end .rdp-day_button,
+    //     .rdp-day.invalid-check-in .rdp-day_button,
+    //     .rdp-day.invalid-check-out .rdp-day_button {
+    //       color: #6a6a6a !important;
+    //       border: 1px solid #ffffff !important;
+    //       background-color: transparent !important;
+    //       font-weight: 500 !important;
+    //       // cursor: not-allowed !important;
+    //     }
+
+    //     // // hover משמר את אותו העיצוב
+    //     // .rdp-day.invalid-check-in-near-end:hover .rdp-day_button,
+    //     // .rdp-day.last-day:hover .rdp-day_button {
+    //     //   background-color: rgb(247, 247, 247) !important;
+    //     //   color: rgb(106, 106, 106) !important;
+    //     // }
+
+    //     // // אם נבחרים – העיצוב נשמר
+    //     // .rdp-day.invalid-check-in-near-end .rdp-day_selected,
+    //     // .rdp-day.last-day.rdp-day_selected {
+    //     //   background-color: #222 !important;
+    //     //   color: white !important;
+    //     //   border-radius: 50% !important;
+    //     //   font-weight: bold !important;
+    //     //   border: none !important;
+    //     // }
+
+    //     // ~~~ Aviv ~~~
+
+    //     // Set color for days outside the selected range
+    //     .rdp-day:not(.rdp-day_selected):not(.rdp-day_range_start):not(.rdp-day_range_end):not(.rdp-day_range_middle) {
+    //       color: black !important;
+    //     }
+
+    //     // Set color of month labels like "June 2025"
+    //     .rdp-caption_label {
+    //       color: black;
+    //     }
+
+        
+
+    //     --rdp-day-hover-border: 2px solid black !important;
+
+    //     --rdp-day-width: 40px !important;
+    //     --rdp-day-height: 40px !important;
+
+    //     --rdp-day_button-width: 40px !important;
+    //     --rdp-day_button-height: 40px !important;
+    //     // --rdp-day_button-border-radius: 50% !important;
+    //     --rdp-day_button-border: none !important;
+
+    //     --rdp-selected-border: none !important;
+
+    //     --rdp-range_middle-background-color: #ebebeb !important;
+    //     --rdp-range_middle-color: black !important;
+
+
+    //     --rdp-range_start-date-background-color: rgb(0, 0, 0) !important;
+    //     --rdp-range_end-date-background-color: black !important;
+
+    //     --rdp-range_start-color: white !important;
+    //     --rdp-range_end-color: white !important;
+
+    //     // --rdp-weekday-opacity: 0.6;
+
+    //     // .rdp-day:disabled {
+    //     //   color: #ccc !important; // Light gray for disabled days
+    //     //   cursor: not-allowed !important;
+    //     //   background-color: transparent !important;
+    //     // }
+
+
+    //     .rdp-day:not(.rdp-day_selected):not(.rdp-day_range_middle):hover .rdp-day_button {
+
+    //       border: 1px solid rgb(0, 0, 0) !important;
+    //       // border-radius: 50% !important;
+    //     }
+
+    //     .rdp-day {
+    //       transition: all 0.2s ease !important;
+    //     }
+
+    //     .rdp-month_caption {
+    //       justify-content: center !important;
+    //       text-align: center !important;
+    //       font-weight: 500 !important;
+    //       font-size: 18px !important;
+    //       // padding-bottom: 0.5rem !important;
+    //     }
+
+    //     .rdp-caption {
+    //       justify-content: center !important;
+    //     }
+
+    //     .rdp-months {
+    //       display: flex !important;
+    //       // margin-left: auto !important;
+    //       // margin-right: auto !important;
+    //       justify-content: center !important;
+    //       // gap: 4rem !important; // gap between two months
+    //       width: 100% !important;
+
+    //     }
+
+    //     width: 100% !important;
+    //     --rdp-range_start-color: white !important;
+    //     --rdp-range_start-date-background-color:black !important;
+    //     // date range start - background color:
+    //     --rdp-range_start-date-background-color:black !important;
+
+    //     // selected range font weight:
+    //     .rdp-selected {
+    //       font-weight: 450;
+    //     }
+
+    //     .rdp-disabled {
+    //       text-decoration: line-through;
+    //     }
+    //   }
+    // }
+  
+  // // ~~~~ Naama ~~~~
+  // .stay-availability {
+  //   margin-top: 3rem;
+  //   width: 99%;
+
+  //   h3 {
+  //     font-size: 22px;
+  //     font-weight: 500;
+  //     margin-bottom: 0rem;
+  //     color: #222222;
+  //   }
+
+  //   p {
+  //     margin: 0.25rem 0;
+  //     font-size: 14px;
+  //     color: #6A6A6A;
+  //   }
+
+  
+
+  //   .selected-dates {
+  //     text-align: right;
+
+  //     .clear-button {
+  //       all: unset; // clear old styles
+
+  //       position: relative;
+  //       padding: 8px;
+  //       margin: 0 -8px;
+  //       min-width: auto;
+
+  //       font-size: 14px;
+  //       font-weight: 500;
+  //       line-height: 18px;
+  //       color: #222;
+  //       text-decoration: underline;
+  //       background-repeat: repeat;
+
+  //       cursor: pointer;
+  //       touch-action: manipulation;
+
+  //       &:hover {
+  //         background-color: #F7F7F7;
+  //         border-radius: 8px;
+  //       }
+  //     }
+  //   }
+
+  //   .calendar-wrapper {
+  //     .rdp-root {
+  //       --rdp-accent-color: #222222 !important;
+  //       --rdp-accent-background-color: #ebebeb !important;
+
+  //       .rdp-day_button {
+  //         display: flex !important;
+  //         align-items: center !important;
+  //         justify-content: center !important;
+  //         flex-direction: column !important;
+
+  //         width: 48px !important;
+  //         height: 48px !important;
+
+  //         font-size: 14px !important;
+  //         font-weight: 500 !important;
+  //         line-height: 18px !important;
+  //         text-align: center !important;
+  //         // cursor: default !important;
+  //         user-select: none !important;
+
+  //         background-color: transparent !important;
+  //         border: 1px solid #ffffff !important;
+  //         border-radius: 100% !important;
+  //         margin: 0 1px !important;
+
+  //         transition: background-color 0.2s ease !important;
+
+  //         &:hover {
+  //           background-color: #ffffff !important;
+  //           color: #000 !important;
+  //         }
+  //       }
+
+  //       .rdp-day.last-day .rdp-day_button,
+  //       .rdp-day.invalid-check-in-near-end .rdp-day_button,
+  //       .rdp-day.invalid-check-in .rdp-day_button,
+  //       .rdp-day.invalid-check-out .rdp-day_button {
+  //         color: #6a6a6a !important;
+  //         border: 1px solid #ffffff !important;
+  //         background-color: transparent !important;
+  //         font-weight: 500 !important;
+  //         // cursor: not-allowed !important;
+  //       }
+
+  //       .rdp-day.last-day .rdp-day_button {
+  //         // background-color: #222 !important;
+  //         color: #6a6a6a !important;
+  //         border-radius: 50% !important;
+  //         border: none !important;
+  //       }
+
+  //       // hover משמר את אותו העיצוב
+  //       .rdp-day.invalid-check-in-near-end:hover .rdp-day_button,
+  //       .rdp-day.last-day:hover .rdp-day_button {
+  //         background-color: rgb(247, 247, 247) !important;
+  //         color: rgb(106, 106, 106) !important;
+  //       }
+
+  //       // אם נבחרים – העיצוב נשמר
+  //       .rdp-day.invalid-check-in-near-end .rdp-day_selected,
+  //       .rdp-day.last-day.rdp-day_selected {
+  //         background-color: #222 !important;
+  //         color: white !important;
+  //         border-radius: 50% !important;
+  //         font-weight: bold !important;
+  //         border: none !important;
+  //       }
+
+
+  //       .rdp-day:not(.rdp-day_selected):not(.rdp-day_range_start):not(.rdp-day_range_end):not(.rdp-day_range_middle) {
+  //         color: black !important;
+  //       }
+
+  //       .rdp-caption_label {
+  //         color: black;
+  //       }
+
+  //       .rdp-weekday {
+  //         color: black !important;
+  //         opacity: 1 !important;
+  //       }
+
+  //       --rdp-day-hover-border: 2px solid black !important;
+
+  //       --rdp-day-width: 40px !important;
+  //       --rdp-day-height: 40px !important;
+
+  //       --rdp-day_button-width: 40px !important;
+  //       --rdp-day_button-height: 40px !important;
+  //       --rdp-day_button-border-radius: 50% !important;
+  //       --rdp-day_button-border: none !important;
+
+  //       --rdp-selected-border: none !important;
+
+  //       --rdp-range_middle-background-color: #ebebeb !important;
+  //       --rdp-range_middle-color: black !important;
+
+  //       --rdp-range_start-date-background-color: black !important;
+  //       --rdp-range_end-date-background-color: black !important;
+
+  //       --rdp-range_start-color: white !important;
+  //       --rdp-range_end-color: white !important;
+
+  //       .rdp-day:not(.rdp-day_selected):not(.rdp-day_range_middle):hover .rdp-day_button {
+  //         border: 1px solid #6a6a6a !important;
+  //         border-radius: 50% !important;
+  //       }
+
+  //       .rdp-day {
+  //         transition: all 0.2s ease !important;
+  //       }
+
+  //       .rdp-month_caption {
+  //         justify-content: center !important;
+  //         text-align: center !important;
+  //         font-weight: 500 !important;
+  //         font-size: 16px !important;
+  //       }
+
+  //       .rdp-caption {
+  //         justify-content: center !important;
+  //       }
+
+  //       .rdp-months {
+  //         display: flex !important;
+  //         padding-top: 22px;
+  //         justify-content: center !important;
+  //         gap: 26px !important;
+  //         width: 100% !important;
+  //       }
+
+  //       width: 100% !important;
+
+  //       .rdp-selected {
+  //         font-weight: 450;
+  //       }
+
+  //       .rdp-disabled {
+  //         text-decoration: line-through;
+  //       }
+
+  //       .rdp-day.rdp-disabled {
+  //         pointer-events: none !important;
+  //       }
+
+  //       .rdp-day.rdp-disabled::before {
+  //         background-color: transparent !important;
+  //         content: none !important;
+  //       }
+
+  //       .rdp-day.rdp-disabled .rdp-day_button {
+  //         background-color: transparent !important;
+  //         border: none !important;
+  //         color: #666666 !important;
+  //         cursor: default !important;
+  //       }
+
+  //     }
+  //   }
+  // }
+
+  // // ~~~~ Aviv ~~~~ 
+  // .rdp {
+  //   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  //   font-size: 10px;
+  //   --rdp-accent-color: #000000;
+  //   --rdp-background-color: #F7F7F7;
+  //   --rdp-accent-background-color: #000000;
+  //   background-color: #FFFFFF;
+  //   padding: 16px;
+  //   border-radius: 8px;
+  //   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  // }
+
+  // /* Month caption */
+  // .rdp-caption {
+  //   font-weight: 600;
+  //   font-size: 16px;
+  //   color: #000000;
+  //   margin-bottom: 8px;
+  // }
+
+  // /* Navigation buttons */
+  // .rdp-nav_button {
+  //   background-color: transparent;
+  //   border: none;
+  //   cursor: pointer;
+  //   padding: 8px;
+  //   border-radius: 50%;
+  //   transition: background-color 0.2s;
+  // }
+
+  // .rdp-nav_button:hover {
+  //   background-color: #ffffff;
+  // }
+
+  // .rdp-nav_button svg {
+  //   fill: #000000;
+  //   width: 16px;
+  //   height: 16px;
+  // }
+
+  // .rdp-day {
+  //   position: relative;
+  //   z-index: 0;
+  //   font-size: 14px;
+  // }
+
+  // .rdp-day::before {
+  //   content: '';
+  //   position: absolute;
+  //   top: 50%;
+  //   left: 50%;
+  //   width: 34px;
+  //   height: 34px;
+  //   transform: translate(-50%, -50%);
+  //   border-radius: 50%;
+  //   transition: background-color 0.2s;
+  //   z-index: -1;
+  // }
+
+  // .rdp-day:hover {
+  //   color: #000000 !important;
+  // }
+
+  // .rdp-day:hover::before {
+  //   background-color: #ffffff;
+  // }
+
+  // /* Styling for valid check-in */
+  // #stay-calendar .valid-check-in {
+  //   background-color: #000000 !important;
+  //   color: #FFFFFF !important;
+  //   border-radius: 50% !important;
+  //   border: none !important;
+  //   font-weight: bold !important;
+  // }
+
+  // /* Disabled days with strike (Case 1) */
+  // .rdp-day_disabled_with_strike {
+  //   color: #666666 !important;
+  //   text-decoration: line-through !important;
+  //   cursor: not-allowed !important;
+  // }
+
+  // /* Disabled days without strike (Case 2) */
+  // .rdp-day_disabled_no_strike {
+  //   color: #666666 !important;
+  //   cursor: not-allowed !important;
+  // }
+
+  // /* Other styles */
+  // .invalid-check-in {
+  //   color: #B0B0B0 !important;
+  // }
+
+  // .invalid-check-out {
+  //   color: #B0B0B0 !important;
+  // }
+
+  // .rdp-day_selected {
+  //   background-color: #F7F7F7 !important;
+  //   color: #000000 !important;
+  // }
+
+  // .rdp-day_range_start {
+  //   background-color: #000000 !important;
+  //   color: #FFFFFF !important;
+  //   border-radius: 50% !important;
+  //   font-weight: bold !important;
+  //   z-index: 2 !important;
+  //   position: relative;
+  // }
+
+  // .rdp-day_range_end {
+  //   background-color: #000000 !important;
+  //   color: #FFFFFF !important;
+  //   border-radius: 50% !important;
+  //   font-weight: bold !important;
+  //   z-index: 2 !important;
+  //   position: relative;
+  // }
+
+  // .rdp-day_range_middle {
+  //   background-color: #F7F7F7 !important;
+  //   color: #000000 !important;
+  // }
+
+  // .rdp-day_selected,
+  // .rdp-day_range_start,
+  // .rdp-day_range_end,
+  // .valid-check-in {
+  //   outline: none !important;
+  // }

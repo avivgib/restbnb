@@ -1,0 +1,8 @@
+# Keep line extensions in text files on LF (Unix style) on all systems
+echo "* text=auto eol=lf" > .gitattributes
+
+# Binary files (such as svg, images) will not be converted
+echo "*.svg binary" >> .gitattributes
+echo "*.png binary" >> .gitattributes
+echo "*.jpg binary" >> .gitattributes
+echo "*.gif binary" >> .gitattributes

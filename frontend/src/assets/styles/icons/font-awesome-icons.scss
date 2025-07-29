@@ -1,0 +1,29 @@
+
+// <i class="fa-solid fa-angle-right"></i>
+.fa.angle-right::before {
+    content: '\f105';
+}
+// <i class="fa-solid fa-angle-left"></i>
+.fa.angle-left::before {
+    content: '\f104';
+}
+
+// <i class="fa-solid fa-chevron-right"></i>
+.fa.chevron-right::before {
+    content: '\f054';
+}
+
+// <i class="fa-solid fa-chevron-left"></i>
+.fa.chevron-left::before {
+    content: '\f053';
+}
+
+// <i class="fa-regular fa-heart"></i>
+.fa.heart::before {
+    content: '\f004';
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    color: white;
+    text-shadow: 0 0 0 0.8px black;
+    transition: transform 0.2s ease; 
+}

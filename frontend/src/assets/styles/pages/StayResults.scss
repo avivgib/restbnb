@@ -1,0 +1,101 @@
+// // src/assets/styles/pages/StayResults.scss
+// .stay-results {
+//     display: flex;
+//     flex-direction: row;
+//     height: 100vh;
+
+//     .results-container {
+//         display: flex;
+//         width: 100%;
+//         flex-direction: row;
+//     }
+
+//     // &[dir="rtl"] .results-container {
+//     //     flex-direction: row-reverse;
+//     // }
+
+//     .stay-list-container {
+//         flex: 1;
+//         padding: 20px;
+//         overflow-y: auto;
+//     }
+
+//     .stay-map-container {
+//         flex: 1;
+//         height: 100%;
+//     }
+
+//     .price-label {
+//         font-size: 12px;
+//         font-weight: bold;
+//         background-color: white;
+//         padding: 2px 5px;
+//         border-radius: 3px;
+//         border: 1px solid #ccc;
+//     }
+// }
+
+
+.stay-results    {
+      font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.stay-results-main {
+    padding-top: 120px;
+    width: 1392;
+    padding-left: 32px;
+    padding-right: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+//   gap: 24px;
+//   padding: 20px 0;
+  flex: 1;
+}
+
+.stay-results-left {
+    
+  width: 778px;
+  box-sizing: border-box;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+//   padding-left: 48px;
+//   padding-right: 48px;
+
+  h2{
+    color: #222;
+    font-size: 15px;
+    font-weight: 500;
+    margin-bottom: 1.3rem;
+  }
+
+  .stay-results-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 24px;  
+  
+
+  }
+}
+
+.stay-results-right {
+
+  width: 550px;
+//   padding-right: 50px;
+  position: sticky;
+  top:120px;
+//   top: 120px; // adjust if you have a sticky header
+  height: 587px;
+
+  .map-container {
+    // width: 550px;
+    height: 100%;
+    background-color: #ddd; // temporary placeholder
+  }
+}

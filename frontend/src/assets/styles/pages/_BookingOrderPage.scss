@@ -1,0 +1,198 @@
+// Components
+@import '../cmps/booking/BookingHeader';
+@import '../cmps/booking/BookingMessageHost';
+@import '../cmps/booking/BookingPaymentMethod';
+@import '../cmps/booking/BookingPaymentOptions';
+@import '../cmps/booking/BookingSummary';
+@import '../cmps/booking/BookingModal';
+
+.booking-main-container{
+  min-height: calc(100vh - 7rem);
+}
+
+.booking-order-page {
+  // padding-bottom: 4rem;
+  font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+  gap: 2rem;
+  margin: 0 auto;
+
+.booking-main-block{
+display: flex;
+// max-width: 71% ;
+max-width: 1075px;
+padding-left: 2rem;
+padding-right: 2rem;
+justify-self: center;
+margin-left: 0%;
+margin-right: 5%;
+
+
+.back-button-container{
+  // max-width: 10%;
+  padding-right: 0px;
+  margin-right: 1rem;
+  padding-left: 0px;
+  margin-left: 0px;
+  display: flex;
+  
+  // margin-left: 10%;
+  
+  .back-btn {
+    position: sticky;
+    top: 100px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background-color: #ebebeb;
+    display: flex;
+    color: #222222;
+    align-items: center; // vertically align arrow inside button
+    justify-content: center; // horizontall align arrow inside button
+    cursor: pointer;
+    font-size: 20px;
+    padding: 0;
+
+    .arrow-icon{
+      img{
+        width: 35%;
+        justify-self: center;
+        
+        
+      }
+    }
+  }
+  
+  .back-btn:hover {
+    background-color: #dcdcdc;
+  }
+  
+  .arrow-icon {
+    font-size: 25px;
+    line-height: 1;
+  }
+}
+
+.right{
+// margin-left: 10%;
+.headline{
+  max-width: 100%;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+
+  h1{
+    padding-top: 1rem;
+    display: flex;
+    justify-items: center;
+    // max-width: 75%;
+    font-size: 32px;
+    color: #222222;
+    margin-bottom: 0;
+  }
+}
+
+.booking-main-content{
+  display: flex;
+  // max-width: 100%;
+  justify-content: space-between;
+  margin: 0 auto;
+  ;
+  
+}
+
+  .main-content {
+    // margin-right: 3rem;
+    padding-left: 0px;
+  margin-left: 0px;
+    max-width: 55%;
+    // padding-right: 2rem;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    // gap: 1.5rem;
+    
+  }
+
+  .booking-payment-options{
+    margin-bottom: 1.5rem;
+  }
+  .booking-payment-method{
+    margin-bottom: 1.5rem;
+  }
+  .booking-message-host{
+    margin-bottom: 1rem;
+  }
+  .booking-terms{
+    margin-bottom: 1rem;
+  }
+
+
+  .message-host{
+    background-color: #FFFFFF;
+    color: #222222;
+  }
+  
+  
+  .summary-sidebar {
+    max-width: 40%;
+    background-color: #FFFFFF;
+    flex: 1;
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+  }
+}
+}
+
+.confirm-btn {
+  // margin-top: 2rem;
+  padding: 1rem 2rem;
+  
+  background-color: #ff385c;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  // padding-top: 0px;
+  //   padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    margin-right: 0px;
+    align-items: center;
+
+
+  &:hover {
+    background-color: #e11d48;
+  }
+
+  &:active {
+    background-color: #c4123d;
+  }
+}
+
+// .headline.with-back-btn {
+//   display: flex;
+//   // align-items: center;
+//   justify-content: left;
+//   gap: 16px;
+//   margin-bottom: 1.5rem; // maintain spacing from content below
+// }
+
+
+
+.booking-terms{
+  color: #222222;
+  font-size: 15px;
+  font-weight: 400;
+  a{
+    color: #222222;
+    text-decoration: underline;
+    font-weight: 550;
+
+  }
+}
+}
