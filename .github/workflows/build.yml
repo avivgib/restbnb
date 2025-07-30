@@ -1,0 +1,41 @@
+name: Build and Prepare App
+
+on:
+  push:
+    branches:
+      - main  # Work only when you push to the main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Clone the code
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm install
+
+    - name: Build frontend with secret API key
+      run: |
+        cd frontend
+        echo "VITE_GOOGLE_MAPS_API_KEY=${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}" > .env
+        npm run build
+
+    - name: Copy frontend build to backend public folder
+      run: |
+        rm -rf backend/public
+        mkdir backend/public
+        cp -r frontend/dist/* backend/public
+
+    - name: Install backend dependencies
+      run: |
+        cd backend
+        npm install
