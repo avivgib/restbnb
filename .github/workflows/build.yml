@@ -23,18 +23,18 @@ jobs:
         cd frontend
         npm install
 
+    - name: Clean backend public folder
+      run: rm -rf backend/public
+
     - name: Build frontend with secret API key
       run: |
         cd frontend
         echo "VITE_GOOGLE_MAPS_API_KEY=${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}" > .env
         npm run build
 
-    - name: Copy frontend build to backend public folder
-      run: |
-        rm -rf backend/public
-        mkdir backend/public
-        cp -r frontend/dist/* backend/public
-
+    - name: Check backend/public contents
+      run: ls -lR backend/public
+      
     - name: Install backend dependencies
       run: |
         cd backend
