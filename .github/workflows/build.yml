@@ -35,6 +35,12 @@ jobs:
     - name: Check backend/public contents
       run: ls -lR backend/public
       
+    - name: Upload frontend build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-build
+        path: backend/public
+
     - name: Install backend dependencies
       run: |
         cd backend
