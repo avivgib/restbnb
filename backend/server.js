@@ -11,7 +11,6 @@ import { reviewRoutes } from './api/review/review.routes.js'
 import { orderRoutes } from './api/orders/orders.routes.js'
 import { stayRoutes } from './api/stay/stay.routes.js'
 import { setupSocketAPI } from './services/socket.service.js'
-
 import { setupAsyncLocalStorage } from './middlewares/setupAls.middleware.js'
 
 const app = express()
@@ -25,15 +24,15 @@ app.use(cookieParser()) // for res.cookies
 app.use(express.json()) // for req.body
 
 if (process.env.NODE_ENV === 'production') {
-  // 🟢 Serve static files from the 'public' directory
+  // Serve static files from 'public'
   app.use(express.static(resolve(__dirname, 'public')))
 
-  // 🟢 Redirect all non-API routes to index.html (for React Router)
+  // Serve index.html for non-API routes
   app.get('/*', (req, res) => {
     res.sendFile(resolve(__dirname, 'public', 'index.html'))
   })
 } else {
-  // 🟡 Development mode CORS setup
+  // Development mode CORS setup
   const corsOptions = {
     origin: [
       'http://127.0.0.1:3000',
@@ -48,7 +47,7 @@ if (process.env.NODE_ENV === 'production') {
   app.use(cors(corsOptions))
 }
 
-app.all('/*all', setupAsyncLocalStorage)
+app.all('*', setupAsyncLocalStorage)
 
 app.use('/api/auth', authRoutes)
 app.use('/api/user', userRoutes)
