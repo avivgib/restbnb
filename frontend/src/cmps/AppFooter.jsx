@@ -7,11 +7,11 @@ export function AppFooter() {
         <footer className="app-footer main-container full">
             <section className="main-content">
                 <div className="left">
-                <p>&copy; 2025 Restbnb, Inc. · Michael · Aviv · Naama</p>
+                <p>&copy; 2025 Restbnb, Inc. · Aviv · Michael · Naama</p>
                 {/* <p>Count: {count}</p> */}
                 </div>
                 <div className="right">
-                    <a href="https://github.com/MichaelFlaischer/restBNB-front"><img src="/img/github-logo.png" alt="github-logo"></img></a>
+                    <a href="https://github.com/avivgib/restbnb"><img src="/img/github-logo.png" alt="github-logo"></img></a>
                     
                 </div>
             </section>
