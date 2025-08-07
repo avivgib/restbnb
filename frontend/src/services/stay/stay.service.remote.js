@@ -20,8 +20,11 @@ async function query(filterBy = {}) {
             checkOut: filterBy.checkOut || '',
             guests: filterBy.guests ? JSON.stringify(filterBy.guests) : '',
         };
-        // console.log('Query params before sending:', queryParams)
-        return await httpService.get('stay', queryParams);
+        console.log('Remote service - Query params before sending:', queryParams)
+        console.log('Remote service - FilterBy received:', filterBy)
+        const result = await httpService.get('stay', queryParams);
+        console.log('Remote service - Received result:', result)
+        return result;
     } catch (err) {
         console.error('Cannot query stays:', err);
         throw err;

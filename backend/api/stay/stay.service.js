@@ -144,14 +144,17 @@ async function removeStayMsg(stayId, msgId) {
 
 function _buildCriteria(filterBy) {
     const criteria = {}
+    logger.info('Building criteria for filterBy:', filterBy)
 
     if (filterBy.location) {
         const regex = new RegExp(filterBy.location, 'i')
         criteria.$or = [
-            { 'loc.country': regex },
-            { 'loc.city': regex },
-            { 'loc.address': regex },
+            { 'name': regex }, // Search in name field (like local service)
+            { 'loc.address': regex }, // Search in address field
+            { 'loc.city': regex }, // Search in city field
+            { 'loc.country': regex }, // Search in country field
         ]
+        logger.info('Location criteria:', criteria.$or)
     }
 
     if (filterBy.guests && typeof filterBy.guests === 'object') {
@@ -171,5 +174,6 @@ function _buildCriteria(filterBy) {
         };
     }
 
+    logger.info('Final criteria:', criteria)
     return criteria
 }

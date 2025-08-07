@@ -4,6 +4,9 @@ import { getRandomIntInclusive, makeId } from '../util.service'
 import { stayService as local } from './stay.service.local.js'
 import { stayService as remote } from './stay.service.remote.js'
 
+console.log('Stay service - Environment variables:', { DEV, VITE_LOCAL })
+console.log('Stay service - Using service:', VITE_LOCAL === 'true' ? 'LOCAL' : 'REMOTE')
+
 function getEmptyStay() {
   return {
     name: `Stay ${makeId()}`,

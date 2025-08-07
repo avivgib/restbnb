@@ -3,7 +3,12 @@ import { stayService } from './stay.service.js'
 
 export async function getStays(req, res) {
     try {
-        logger.info('Received query params:', req.query)
+        logger.info('=== STAY CONTROLLER DEBUG ===')
+        logger.info('Request URL:', req.url)
+        logger.info('Request method:', req.method)
+        logger.info('Request query params:', req.query)
+        logger.info('=== END DEBUG ===')
+        
         let guests = null
 
         if (req.query.guests) {
@@ -35,7 +40,7 @@ export async function getStays(req, res) {
         }
         logger.info('FilterBy object:', filterBy)
         const stays = await stayService.query(filterBy)
-        // console.log('Stays sent to client:', stays)
+        logger.info(`Returning ${stays.length} stays for filter:`, filterBy)
         res.json(stays)
     } catch (err) {
         logger.error('Failed to get stays', err)
