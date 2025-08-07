@@ -24,6 +24,10 @@ async function query(filterBy = {}) {
         console.log('Remote service - FilterBy received:', filterBy)
         const result = await httpService.get('stay', queryParams);
         console.log('Remote service - Received result:', result)
+         
+        if (Array.isArray(result)) {
+            console.log('Remote service - Number of stays returned:', result.length)
+        }
         return result;
     } catch (err) {
         console.error('Cannot query stays:', err);

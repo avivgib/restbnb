@@ -20,8 +20,14 @@ export function StayList({ stays }) {
         // Fetch stays for each city asynchronously
         const promises = CITIES.map(async (city) => {
           try {
-            const cityStays = await stayService.query({ location: city })
-            
+            let cityStays = await stayService.query({ location: city })
+            // Ensure cityStays is always a plain array
+            if (!Array.isArray(cityStays)) {
+              cityStays = Array.from(cityStays)
+            }
+            // Debug log to check what is returned
+            // console.log(`cityStays for ${city}:`, cityStays)
+
             // Sort by rating (highest first) and take top 8
             const sortedStays = cityStays
               .sort((a, b) => {
@@ -30,7 +36,7 @@ export function StayList({ stays }) {
                 return ratingB - ratingA // Sort descending (highest first)
               })
               .slice(0, 8)
-            
+
             cityStaysData[city] = sortedStays
           } catch (err) {
             console.error(`Error fetching stays for ${city}:`, err)
@@ -39,6 +45,7 @@ export function StayList({ stays }) {
         })
         
         await Promise.all(promises)
+        console.log('StayList - cityStaysData:', cityStaysData)
         setCityStays(cityStaysData)
       } catch (err) {
         console.error('Error fetching city stays:', err)

@@ -1,4 +1,3 @@
-
 import { storageService } from '../async-storage.service.js'
 import { makeId } from '../util.service.js'
 import { userService } from '../user/index.js'
@@ -37,6 +36,7 @@ async function query(filterBy = {}) {
             stays = stays.filter(stay => stay.capacity >= totalGuests)
         }
 
+        console.log('Local service - Returned stays:', stays)
         return stays
     } catch (err) {
         console.error('Error fetching stays:', err)
