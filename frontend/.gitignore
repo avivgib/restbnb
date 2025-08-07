@@ -2,12 +2,13 @@
 node_modules/
 
 # Build output
+/frontend/dist
 dist/
 dist-ssr
 *.local
 
 # Env files
-.env
+*.env
 
 # Logs
 logs

@@ -17,33 +17,13 @@ export function StayList({ stays }) {
       try {
         const cityStaysData = {}
         
-        // Fetch all stays once and filter client-side for better production compatibility
-        console.log('Fetching all stays...')
-        let allStays = []
-        try {
-          allStays = await stayService.query({})
-          console.log(`Received ${allStays.length} total stays from service`)
-        } catch (err) {
-          console.error('Error fetching from service, using fallback stays:', err)
-          allStays = stays || []
-        }
-        
-        // Process each city with client-side filtering
-        CITIES.forEach((city) => {
+        // Fetch stays for each city asynchronously
+        const promises = CITIES.map(async (city) => {
           try {
-            console.log(`Filtering stays for city: ${city}`)
-            
-            // Client-side filtering for each city
-            const filteredStays = allStays.filter(stay => {
-              const location = stay.loc?.address || stay.loc?.city || stay.loc?.country || stay.name || ''
-              const matchesCity = location.toLowerCase().includes(city.toLowerCase())
-              return matchesCity
-            })
-            
-            console.log(`Found ${filteredStays.length} stays for ${city}`)
+            const cityStays = await stayService.query({ location: city })
             
             // Sort by rating (highest first) and take top 8
-            const sortedStays = filteredStays
+            const sortedStays = cityStays
               .sort((a, b) => {
                 const ratingA = a.rating || 0
                 const ratingB = b.rating || 0
@@ -51,36 +31,17 @@ export function StayList({ stays }) {
               })
               .slice(0, 8)
             
-            console.log(`After sorting and slicing, ${sortedStays.length} stays for ${city}`)
             cityStaysData[city] = sortedStays
           } catch (err) {
-            console.error(`Error processing stays for ${city}:`, err)
+            console.error(`Error fetching stays for ${city}:`, err)
             cityStaysData[city] = []
           }
         })
         
-        // If no stays found from service, try using the passed stays prop
-        const hasAnyStays = Object.values(cityStaysData).some(stays => stays.length > 0)
-        if (!hasAnyStays && stays && stays.length > 0) {
-          console.log('No stays found from service, using passed stays prop')
-          CITIES.forEach((city) => {
-            const cityStays = stays.filter(stay => {
-              const location = stay.loc?.address || stay.loc?.city || stay.loc?.country || stay.name || ''
-              return location.toLowerCase().includes(city.toLowerCase())
-            }).sort((a, b) => {
-              const ratingA = a.rating || 0
-              const ratingB = b.rating || 0
-              return ratingB - ratingA
-            }).slice(0, 8)
-            
-            cityStaysData[city] = cityStays
-          })
-        }
-        
-        console.log('Final cityStaysData:', cityStaysData)
+        await Promise.all(promises)
         setCityStays(cityStaysData)
       } catch (err) {
-        console.error('Error fetching stays:', err)
+        console.error('Error fetching city stays:', err)
         setError('Failed to load stays')
       } finally {
         setLoading(false)
