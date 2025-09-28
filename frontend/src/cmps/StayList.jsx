@@ -17,43 +17,35 @@ export function StayList({ stays }) {
       
       try {
         const cityStaysData = {}
-        
-        // Fetch stays for each city asynchronously with limit
+
         const promises = CITIES.map(async (city) => {
           try {
-            // Use limit parameter to get more stays than needed for better sorting
-            const cityStays = await stayService.query({ 
-              location: city, 
-              limit: 50 // Get more stays to ensure we have enough with ratings
-            })
-            
-            // Filter stays with ratings and sort by rating (highest first)
-            const staysWithRating = cityStays.filter(stay => 
-              stay.rating !== undefined && stay.rating !== null && stay.rating > 0
-            )
-            
-            // Sort by rating (highest first) and take top 8
-            const sortedStays = staysWithRating
-              .sort((a, b) => {
-                const ratingA = a.rating || 0
-                const ratingB = b.rating || 0
-                return ratingB - ratingA // Sort descending (highest first)
-              })
+            // Fetch stays from API
+            const cityData = await stayService.query({ location: city, limit: 50 })
+
+            // Filter stays with rating
+            const staysWithRating = cityData.filter(stay => stay.rating > 0)
+
+            // Sort descending and take top 8
+            cityStaysData[city] = staysWithRating
+              .sort((a, b) => b.rating - a.rating)
               .slice(0, STAYS_PER_CITY)
-            
-            // Log for debugging (only in development)
-            if (process.env.NODE_ENV === 'development') {
-              console.log(`${city}: Found ${cityStays.length} total, ${staysWithRating.length} with rating, limited to ${sortedStays.length}`)
-            }
-            
-            cityStaysData[city] = sortedStays
+
           } catch (err) {
             console.error(`Error fetching stays for ${city}:`, err)
             cityStaysData[city] = []
           }
         })
-        
+
         await Promise.all(promises)
+
+        // If some cities have no data, use fallback from prop
+        CITIES.forEach(city => {
+          if (!cityStaysData[city] || cityStaysData[city].length === 0) {
+            cityStaysData[city] = getFallbackStaysForCity(city)
+          }
+        })
+
         setCityStays(cityStaysData)
       } catch (err) {
         console.error('Error fetching city stays:', err)
@@ -64,7 +56,21 @@ export function StayList({ stays }) {
     }
 
     fetchCityStays()
-  }, [])
+  }, [stays])
+
+  const getFallbackStaysForCity = (city) => {
+    if (!stays || stays.length === 0) return []
+
+    const cityStays = stays.filter(stay => {
+      const location = stay.loc?.address || stay.name || ''
+      return location.toLowerCase().includes(city.toLowerCase())
+    })
+
+    return cityStays
+      .filter(stay => stay.rating > 0)
+      .sort((a, b) => b.rating - a.rating)
+      .slice(0, STAYS_PER_CITY)
+  }
 
   const getCityTitle = (city) => {
     const titles = {
@@ -79,73 +85,29 @@ export function StayList({ stays }) {
     return titles[city] || `Popular homes in ${city}`
   }
 
-  // Fallback function to get stays for a city from the passed stays prop
-  const getFallbackStaysForCity = (city) => {
-    if (!stays || stays.length === 0) return []
-    
-    // Filter stays by city name in the location data
-    const cityStays = stays.filter(stay => {
-      const location = stay.loc?.address || stay.name || ''
-      return location.toLowerCase().includes(city.toLowerCase())
-    })
-    
-    // Filter stays with ratings and sort by rating (highest first)
-    const staysWithRating = cityStays.filter(stay => 
-      stay.rating !== undefined && stay.rating !== null && stay.rating > 0
-    )
-    
-    // Sort by rating (highest first) and take top 8
-    return staysWithRating
-      .sort((a, b) => {
-        const ratingA = a.rating || 0
-        const ratingB = b.rating || 0
-        return ratingB - ratingA // Sort descending (highest first)
-      })
-      .slice(0, STAYS_PER_CITY)
-  }
-
-  if (loading) {
-    return <div>Loading city stays...</div>
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>
-  }
+  if (loading) return <div>Loading city stays...</div>
+  if (error) return <div>Error: {error}</div>
 
   return (
     <>
-      {CITIES.map((city) => {
-        // Use city-specific stays if available, otherwise fallback to filtering from passed stays
+      {CITIES.map(city => {
         let cityStaysList = cityStays[city] || []
-        
-        // If no city-specific stays found, try fallback
-        if (cityStaysList.length === 0) {
-          cityStaysList = getFallbackStaysForCity(city)
-        }
-        
-        // Final verification - ensure we never exceed STAYS_PER_CITY
+
+        // Final verification: never exceed STAYS_PER_CITY
         if (cityStaysList.length > STAYS_PER_CITY) {
           cityStaysList = cityStaysList.slice(0, STAYS_PER_CITY)
-          if (process.env.NODE_ENV === 'development') {
-            console.warn(`${city}: Final verification limited stays to ${STAYS_PER_CITY}`)
-          }
         }
-        
-        // Only render carousel if there are stays for this city
-        if (cityStaysList.length === 0) {
-          return null
-        }
-        
-        // Final log to verify the result
-        if (process.env.NODE_ENV === 'development') {
-          console.log(`${city}: Final result - ${cityStaysList.length} stays`)
-        }
-        
+
+        if (cityStaysList.length === 0) return null
+
+        // Always log final result (helps debugging production issues)
+        console.log(`${city}: ${cityStaysList.length} stays loaded`)
+
         return (
-          <StayCarousel 
-            key={city} 
-            title={getCityTitle(city)} 
-            stays={cityStaysList} 
+          <StayCarousel
+            key={city}
+            title={getCityTitle(city)}
+            stays={cityStaysList}
           />
         )
       })}
