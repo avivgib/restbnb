@@ -11,7 +11,7 @@ export function AppFooter() {
                 {/* <p>Count: {count}</p> */}
                 </div>
                 <div className="right">
-                    <a href="https://github.com/MichaelFlaischer/restBNB-front"><img src="/img/github-logo.png" alt="github-logo"></img></a>
+                    <a href="https://github.com/avivgib/restbnb"><img src="/img/github-logo.png" alt="github-logo"></img></a>
                     
                 </div>
             </section>
