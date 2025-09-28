@@ -1,0 +1,73 @@
+name: Build and Deploy Production
+
+# Trigger this workflow only when pushing to the main branch
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    # -------------------------------
+    # 1. Checkout the code from the main branch
+    # -------------------------------
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    # -------------------------------
+    # 2. Set up Node.js environment
+    # -------------------------------
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    # -------------------------------
+    # 3. Frontend: install dependencies and build
+    # -------------------------------
+    - name: Install frontend dependencies
+      run: |
+        cd frontend
+        npm install
+
+    - name: Build frontend
+      run: |
+        cd frontend
+        # Create a temporary .env file with the secret API key for the build
+        echo "VITE_GOOGLE_MAPS_API_KEY=${{ secrets.VITE_GOOGLE_MAPS_API_KEY }}" > .env
+        npm run build
+
+    # -------------------------------
+    # 4. Upload frontend build artifact for testing or future steps
+    # -------------------------------
+    - name: Upload frontend build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: frontend-build
+        path: backend/public
+
+    # -------------------------------
+    # 5. Backend: install dependencies
+    # -------------------------------
+    - name: Install backend dependencies
+      run: |
+        cd backend
+        npm install
+
+    # -------------------------------
+    # 6. Deploy to Render Production using the Render API
+    # -------------------------------
+    - name: Deploy to Render Production
+      env:
+        RENDER_API_KEY: ${{ secrets.RENDER_API_KEY }}
+        RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID_PROD }}
+      run: |
+        echo "Starting deploy to Render Production..."
+        # Trigger a deploy by calling Render's API
+        curl -X POST "https://api.render.com/v1/services/$RENDER_SERVICE_ID/deploys" \
+          -H "Authorization: Bearer $RENDER_API_KEY" \
+          -H "Content-Type: application/json" \
+          -d '{}'
