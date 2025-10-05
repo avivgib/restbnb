@@ -1,4 +1,5 @@
 import { httpService } from '../http.service.js'
+import { userService } from '../user/index.js'
 
 export const stayService = {
     query,
@@ -8,23 +9,19 @@ export const stayService = {
     addStayMsg
 }
 
-// async function query(filterBy = {}) {
-//     return httpService.get('stay', filterBy)
-// }
-
 async function query(filterBy = {}) {
     try {
-        const queryParams = {
-            location: filterBy.location || '',
-            checkIn: filterBy.checkIn || '',
-            checkOut: filterBy.checkOut || '',
-            guests: filterBy.guests ? JSON.stringify(filterBy.guests) : '',
-        };
-        // console.log('Query params before sending:', queryParams)
-        return await httpService.get('stay', queryParams);
+        const queryParams = {}
+
+        if (filterBy.location) queryParams.location = filterBy.location
+        if (filterBy.checkIn) queryParams.checkIn = filterBy.checkIn
+        if (filterBy.checkOut) queryParams.checkOut = filterBy.checkOut
+        if (filterBy.guests) queryParams.guests = JSON.stringify(filterBy.guests)
+
+        return await httpService.get('stay', queryParams)
     } catch (err) {
-        console.error('Cannot query stays:', err);
-        throw err;
+        console.error('Cannot query stays:', err)
+        throw err
     }
 }
 
@@ -37,11 +34,28 @@ async function remove(stayId) {
 }
 
 async function save(stay) {
-    var savedStay
+    let savedStay
     if (stay._id) {
-        savedStay = await httpService.put(`stay/${stay._id}`, stay)
+        // update
+        const stayToSave = {
+            _id: stay._id,
+            name: stay.name,
+            price: stay.price,
+            loc: stay.loc,
+            capacity: stay.capacity,
+        }
+        savedStay = await httpService.put(`stay/${stay._id}`, stayToSave)
     } else {
-        savedStay = await httpService.post('stay', stay)
+        // create
+        const stayToSave = {
+            name: stay.name,
+            price: stay.price,
+            loc: stay.loc,
+            capacity: stay.capacity,
+            host: userService.getLoggedinUser(),
+            msgs: []
+        }
+        savedStay = await httpService.post('stay', stayToSave)
     }
     return savedStay
 }

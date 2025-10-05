@@ -4,25 +4,24 @@ import { stayService } from './stay.service.js'
 export async function getStays(req, res) {
     try {
         logger.info('Received query params:', req.query)
-        let guests = null
 
+        let guests = null
         if (req.query.guests) {
-            if (typeof req.query.guests === 'string') {
-                try {
+            try {
+                if (typeof req.query.guests === 'string') {
                     guests = JSON.parse(req.query.guests)
-                } catch (parseErr) {
-                    logger.warn('Failed to parse guests as JSON', req.query.guests, parseErr)
+                } else {
+                    guests = req.query.guests
                 }
-            } else if (typeof req.query.guests === 'object') {
+
                 guests = {
-                    adults: Number(req.query.guests.adults) || 0,
-                    children: Number(req.query.guests.children) || 0,
-                    infants: Number(req.query.guests.infants) || 0,
-                    pets: Number(req.query.guests.pets) || 0,
+                    adults: Number(guests.adults) || 0,
+                    children: Number(guests.children) || 0,
+                    infants: Number(guests.infants) || 0,
+                    pets: Number(guests.pets) || 0,
                 }
-            }
-            if (!guests || typeof guests !== 'object' || (!guests.adults && !guests.children)) {
-                logger.warn('Invalid guests object:', guests)
+            } catch (parseErr) {
+                logger.warn('Failed to parse guests', req.query.guests, parseErr)
                 guests = null
             }
         }
@@ -33,15 +32,16 @@ export async function getStays(req, res) {
             checkOut: req.query.checkOut || null,
             guests,
         }
+
         logger.info('FilterBy object:', filterBy)
         const stays = await stayService.query(filterBy)
-        // console.log('Stays sent to client:', stays)
         res.json(stays)
     } catch (err) {
         logger.error('Failed to get stays', err)
         res.status(400).send({ err: 'Failed to get stays' })
     }
 }
+
 
 export async function getStayById(req, res) {
     try {
