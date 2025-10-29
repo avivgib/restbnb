@@ -88,6 +88,10 @@ export function StayList({ stays }) {
   if (loading) return <div>Loading city stays...</div>
   if (error) return <div>Error: {error}</div>
 
+  // Added check to ensure at least one city has stays
+  const visibleCities = CITIES.filter(city => cityStays[city] && cityStays[city].length > 0)
+  if (visibleCities.length === 0) return <div>No stays available!</div>
+
   return (
     <>
       {CITIES.map(city => {

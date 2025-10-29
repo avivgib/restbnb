@@ -12,9 +12,12 @@ const rootReducer = combineReducers({
     reviewModule: reviewReducer,
 })
 
+// הפעלת DevTools רק בסביבת פיתוח אם קיים
+const composeEnhancers = (process.env.NODE_ENV === 'development' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__)
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : undefined
 
-const middleware = (window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__() : undefined
-export const store = createStore(rootReducer, middleware)
+export const store = createStore(rootReducer, composeEnhancers ? composeEnhancers() : undefined)
 
 // For debug:
 // store.subscribe(() => {

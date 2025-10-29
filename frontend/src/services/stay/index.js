@@ -4,6 +4,11 @@ import { getRandomIntInclusive, makeId } from '../util.service'
 import { stayService as local } from './stay.service.local.js'
 import { stayService as remote } from './stay.service.remote.js'
 
+const API_BASE = process.env.REACT_APP_API_URL
+  || (process.env.NODE_ENV === 'production'
+    ? `${window.location.origin}/api/stay`
+    : 'http://localhost:3030/api/stay')
+
 function getEmptyStay() {
   return {
     name: `Stay ${makeId()}`,
