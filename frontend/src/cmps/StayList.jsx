@@ -10,6 +10,37 @@ export function StayList({ stays }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
 
+  // Helper function to filter and sort stays consistently
+  const filterAndSortStays = (staysList) => {
+    if (!staysList || staysList.length === 0) return []
+    
+    return staysList
+      .filter(stay => stay && (stay.rating > 0 || stay.rating === undefined))
+      .sort((a, b) => {
+        const ratingA = a.rating || 0
+        const ratingB = b.rating || 0
+        if (ratingB !== ratingA) return ratingB - ratingA
+        // Secondary sort by price (lower is better for display)
+        return (a.price || 0) - (b.price || 0)
+      })
+      .slice(0, STAYS_PER_CITY)
+  }
+
+  // Helper function to get stays for a city from the prop stays array
+  const getStaysForCity = (city, staysList) => {
+    if (!staysList || staysList.length === 0) return []
+
+    const cityStays = staysList.filter(stay => {
+      if (!stay) return false
+      const cityMatch = stay.loc?.city?.toLowerCase() === city.toLowerCase()
+      const countryMatch = stay.loc?.country?.toLowerCase() === city.toLowerCase()
+      const addressMatch = stay.loc?.address?.toLowerCase().includes(city.toLowerCase())
+      return cityMatch || countryMatch || addressMatch
+    })
+
+    return filterAndSortStays(cityStays)
+  }
+
   useEffect(() => {
     const fetchCityStays = async () => {
       setLoading(true)
@@ -18,18 +49,21 @@ export function StayList({ stays }) {
       try {
         const cityStaysData = {}
 
+        // Try to fetch from API for each city
         const promises = CITIES.map(async (city) => {
           try {
             // Fetch stays from API
-            const cityData = await stayService.query({ location: city, limit: 50 })
+            const cityData = await stayService.query({ location: city })
 
-            // Filter stays with rating
-            const staysWithRating = cityData.filter(stay => stay.rating > 0)
-
-            // Sort descending and take top 8
-            cityStaysData[city] = staysWithRating
-              .sort((a, b) => b.rating - a.rating)
-              .slice(0, STAYS_PER_CITY)
+            // Filter and sort stays consistently
+            const processedStays = filterAndSortStays(cityData)
+            
+            // If API returned data, use it; otherwise will fallback below
+            if (processedStays && processedStays.length > 0) {
+              cityStaysData[city] = processedStays
+            } else {
+              cityStaysData[city] = []
+            }
 
           } catch (err) {
             console.error(`Error fetching stays for ${city}:`, err)
@@ -39,17 +73,26 @@ export function StayList({ stays }) {
 
         await Promise.all(promises)
 
-        // If some cities have no data, use fallback from prop
+        // If some cities have no data from API, use fallback from prop
         CITIES.forEach(city => {
           if (!cityStaysData[city] || cityStaysData[city].length === 0) {
-            cityStaysData[city] = getFallbackStaysForCity(city)
+            const fallbackStays = getStaysForCity(city, stays)
+            if (fallbackStays && fallbackStays.length > 0) {
+              cityStaysData[city] = fallbackStays
+            }
           }
         })
 
         setCityStays(cityStaysData)
       } catch (err) {
         console.error('Error fetching city stays:', err)
-        setError('Failed to load stays')
+        // On complete failure, try to use prop stays
+        const fallbackCityStays = {}
+        CITIES.forEach(city => {
+          fallbackCityStays[city] = getStaysForCity(city, stays)
+        })
+        setCityStays(fallbackCityStays)
+        setError(null) // Don't show error if we have fallback data
       } finally {
         setLoading(false)
       }
@@ -57,20 +100,6 @@ export function StayList({ stays }) {
 
     fetchCityStays()
   }, [stays])
-
-  const getFallbackStaysForCity = (city) => {
-    if (!stays || stays.length === 0) return []
-
-    const cityStays = stays.filter(stay => {
-      const location = stay.loc?.address || stay.name || ''
-      return location.toLowerCase().includes(city.toLowerCase())
-    })
-
-    return cityStays
-      .filter(stay => stay.rating > 0)
-      .sort((a, b) => b.rating - a.rating)
-      .slice(0, STAYS_PER_CITY)
-  }
 
   const getCityTitle = (city) => {
     const titles = {
